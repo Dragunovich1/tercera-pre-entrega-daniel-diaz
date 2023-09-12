@@ -1,0 +1,35 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+
+
+    <p> Resultado de la busqueda del cliente</p>
+
+    
+    {% if cliente  %}
+
+    <ul>
+            
+            {% for cli in cliente %}
+
+            <li> {{cli}}</li>
+                
+            {% endfor %}
+                
+
+    
+    </ul>
+        
+    {% endif %}
+        
+    
+    
+
+
+   
+
+    
+{% endblock contenidoQueCambia %}
+    

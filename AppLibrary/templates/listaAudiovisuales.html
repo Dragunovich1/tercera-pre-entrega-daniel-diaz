@@ -1,0 +1,16 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+    <br>
+    <div class="titulo_listas">
+        <h4> Listado de Material Audiovisual </h4>
+        <br>
+    </div>
+    <div class="listas">
+        {% for audiovisual in listaAudiovisuales %}
+            <ul>
+                <li> {{ audiovisual.autor }} -- {{ audiovisual.nombre_material }}</li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock contenidoQueCambia %}

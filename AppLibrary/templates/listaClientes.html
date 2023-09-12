@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+    <br>
+    
+    <div class="titulo_listas">
+    <h4> Listado de clientes </h4>
+    <br>
+   </div>
+    <div class="listas">
+
+     {% for cliente in listaClientes %}
+
+        <ul >
+
+            <li > {{cliente.nombre}} -- {{cliente.apellido}} -- {{cliente.dni}} </li>
+
+        </ul>
+        
+    {% endfor %}
+    </div>
+    
+{% endblock contenidoQueCambia %}

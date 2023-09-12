@@ -1,0 +1,35 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+
+
+    <p> Resultado de la busqueda del material audiovisual</p>
+
+    
+    {% if audiovisual  %}
+
+    <ul>
+            
+            {% for av in audiovisual %}
+
+            <li> {{av}}</li>
+                
+            {% endfor %}
+                
+
+    
+    </ul>
+        
+    {% endif %}
+        
+    
+    
+
+
+   
+
+    
+{% endblock contenidoQueCambia %}
+    

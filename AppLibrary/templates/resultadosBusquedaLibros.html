@@ -1,0 +1,35 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+
+
+    <p> Resultado de la busqueda del libro</p>
+
+    
+    {% if libro  %}
+
+    <ul>
+            
+            {% for lib in libro %}
+
+            <li> {{lib}}</li>
+                
+            {% endfor %}
+                
+
+    
+    </ul>
+        
+    {% endif %}
+        
+    
+    
+
+
+   
+
+    
+{% endblock contenidoQueCambia %}
+    

@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+    <br>
+    
+    <div class="titulo_listas">
+    <h4> Listado de empleados </h4>
+    <br>
+   </div>
+    <div class="listas">
+
+     {% for empleado in listaEmpleados %}
+
+        <ul >
+
+            <li > {{empleado.legajo}} -- {{empleado.nombre}} -- {{empleado.apellido}} -- {{empleado.dni}} -- {{empleado.fecha_ingreso}} </li>
+
+        </ul>
+        
+    {% endfor %}
+    </div>
+    
+{% endblock contenidoQueCambia %}

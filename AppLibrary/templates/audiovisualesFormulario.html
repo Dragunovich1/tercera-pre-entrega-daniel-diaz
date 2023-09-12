@@ -1,0 +1,22 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+
+    <form action="{% url 'audiovisualesFormularios' %}" method="post"> {% csrf_token %} 
+
+        <div class="tituloCrear">
+            <h4> Usted está agregando un nuevo material audiovisual </h4>
+        
+        <br>
+        {{ audFormulario.as_p}}
+        <br>
+
+        <button type="submit"> Grabar </button>
+         </div>
+    </form>
+
+
+   
+{% endblock contenidoQueCambia %}

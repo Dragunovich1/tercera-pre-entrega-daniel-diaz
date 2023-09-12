@@ -1,4 +1,6 @@
 Tercera Pre-Entrega Daniel Diaz - CoderHose Proyect Django
+
+
 Simularemos un sistema simple de gestion de biblioteca
 
 Las funcionalidades de la página y la forma de actuar es la siguiente:

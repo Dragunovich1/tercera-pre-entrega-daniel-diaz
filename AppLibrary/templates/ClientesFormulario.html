@@ -7,7 +7,7 @@
     <form action="{% url 'clientesFormularios' %}" method="post"> {% csrf_token %} 
 
         <div class="tituloCrear">
-            <h4> Se esta creando un nuevo cliente </h4>
+            <h4> Nuevo cliente: </h4>
         
         <br>
         {{ cliFormulario.as_p}}

@@ -7,7 +7,7 @@
     <form action="{% url 'empleadosFormularios' %}" method="post"> {% csrf_token %} 
 
         <div class="tituloCrear">
-            <h4> Usted está agregando un nuevo empleado </h4>
+            <h4> Nuevo empleado: </h4>
         
         <br>
         {{ empleadFormulario.as_p}}

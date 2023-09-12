@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.http import HttpResponse,HttpRequest
 from AppLibrary.models import Cliente,Empleado,Libro,Audiovisual
+from django.db.models import Q
 from .forms import ClienteFormulario, EmpleadoFormulario,LibroFormulario,AudiovisualFormulario
 
 
@@ -104,61 +105,77 @@ def busquedaAudiovisuales(request):
     return render(request,"busquedaAudiovisuales.html")
 
 
+from django.db.models import Q
+
 def buscarCliente(request):
     try:
-        nombre = request.GET.get("busca_nombre", "").strip()  # Obtener el valor del campo y quitar espacios en blanco
-        if nombre:
-            cliente = Cliente.objects.filter(nombre__icontains=nombre)
-            if cliente.exists():
-                return render(request, "resultadosBusquedaCliente.html", {"cliente": cliente})
+        query = request.GET.get("busca_nombre", "").strip()
+        if query:
+            clientes = Cliente.objects.filter(
+                Q(nombre__icontains=query) |
+                Q(apellido__icontains=query) |
+                Q(dni__icontains=query)
+            )
+            if clientes.exists():
+                return render(request, "resultadosBusquedaCliente.html", {"cliente": clientes})
             else:
-                return HttpResponse("El cliente que está buscando no existe")
+                return HttpResponse("No se encontraron clientes con la búsqueda especificada")
         else:
-            return HttpResponse("Ingrese un nombre válido para buscar un cliente")
-    except ObjectDoesNotExist:
-        return HttpResponse("Error al buscar el cliente")
-    
+            return HttpResponse("Ingrese un término válido para buscar clientes")
+    except Exception as e:
+        return HttpResponse(f"Error al buscar clientes: {str(e)}")
+
 def buscar(request):
     try:
-        nombre = request.GET.get("busca_nombre", "").strip()  # Obtener el valor del campo y quitar espacios en blanco
-        if nombre:
-            empleado = Empleado.objects.filter(nombre__icontains=nombre)
-            if empleado.exists():
-                return render(request, "resultadosBusqueda.html", {"empleado": empleado})
+        query = request.GET.get("busca_nombre", "").strip()
+        if query:
+            empleados = Empleado.objects.filter(
+                Q(nombre__icontains=query) |
+                Q(apellido__icontains=query) |
+                Q(dni__icontains=query) |
+                Q(legajo__icontains=query)
+            )
+            if empleados.exists():
+                return render(request, "resultadosBusqueda.html", {"empleado": empleados})
             else:
-                return HttpResponse("El empleado que está buscando no existe")
+                return HttpResponse("No se encontraron empleados con la búsqueda especificada")
         else:
-            return HttpResponse("Ingrese un nombre válido para buscar un empleado")
-    except ObjectDoesNotExist:
-        return HttpResponse("Error al buscar el empleado")
-    
-    
+            return HttpResponse("Ingrese un término válido para buscar empleados")
+    except Exception as e:
+        return HttpResponse(f"Error al buscar empleados: {str(e)}")
+
 def buscarLibro(request):
     try:
-        titulo_libro = request.GET.get("busca_titulo", "").strip()
-        if titulo_libro:
-            libros = Libro.objects.filter(nombre_libro__icontains=titulo_libro)
+        query = request.GET.get("busca_titulo", "").strip()
+        if query:
+            libros = Libro.objects.filter(
+                Q(autor__icontains=query) |
+                Q(nombre_libro__icontains=query)
+            )
             if libros.exists():
                 return render(request, "resultadosBusquedaLibros.html", {"libro": libros})
             else:
-                return HttpResponse("El libro que está buscando no existe")
+                return HttpResponse("No se encontraron libros con la búsqueda especificada")
         else:
-            return HttpResponse("Ingrese un título válido para buscar un libro")
+            return HttpResponse("Ingrese un título válido para buscar libros")
     except Exception as e:
-        return HttpResponse(f"Error al buscar el libro: {str(e)}")
+        return HttpResponse(f"Error al buscar libros: {str(e)}")
 
 
-    
 def buscarAudiovisual(request):
     try:
-        nombre_material = request.GET.get("busca_nombre", "").strip()
-        if nombre_material:
-            audiovisual = Audiovisual.objects.filter(nombre_material__icontains=nombre_material)
+        query = request.GET.get("busca_nombre", "").strip()
+        if query:
+            audiovisual = Audiovisual.objects.filter(
+                Q(autor__icontains=query) |
+                Q(nombre_material__icontains=query)
+            )
             if audiovisual.exists():
                 return render(request, "resultadosBusquedaAudiovisual.html", {"audiovisual": audiovisual})
             else:
-                return HttpResponse("El material audiovisual que está buscando no existe")
+                return HttpResponse("No se encontró material audiovisual con la búsqueda especificada")
         else:
-            return HttpResponse("Ingrese un nombre válido para buscar material audiovisual")
+            return HttpResponse("Ingrese un término válido para buscar material audiovisual")
     except Exception as e:
         return HttpResponse(f"Error al buscar material audiovisual: {str(e)}")
+
